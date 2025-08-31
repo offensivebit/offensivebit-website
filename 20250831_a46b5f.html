@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Øffensive Bit | We Play Øffense, You Win Defense</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Roboto+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --dark-bg: #000000;
+            --dark-card: #111111;
+            --text-light: #7A0D0D;
+            --text-gray: #8A0D0D;
+            --primary-red: #A0A0A0;
+            --accent-red: #E0E0E0;
+            --vortex-red: #FFFFFF;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            font-family: 'Roboto Mono', monospace;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header & Navigation */
+        header {
+            background-color: rgba(30, 34, 38, 0.95);
+            border-bottom: 1px solid rgba(178, 34, 34, 0.3);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--primary-red);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            transition: color 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-red);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 160px 0 100px;
+            background: linear-gradient(to bottom, rgba(30, 34, 38, 0.9), rgba(40, 20, 20, 0.8)), 
+                        radial-gradient(circle at center, rgba(204, 51, 51, 0.1) 0%, transparent 70%);
+            background-size: cover;
+            text-align: center;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(230, 0, 0, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 80% 70%, rgba(230, 0, 0, 0.1) 0%, transparent 20%);
+            pointer-events: none;
+        }
+        
+        .hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-weight: 800;
+            color: var(--primary-red);
+            text-shadow: 0 0 10px rgba(178, 34, 34, 0.5);
+            letter-spacing: 2px;
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            color: var(--text-gray);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: var(--primary-red);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(178, 34, 34, 0.3);
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .btn:hover {
+            background-color: var(--accent-red);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(178, 34, 34, 0.4);
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            border: 2px solid var(--primary-red);
+            color: var(--primary-red);
+            box-shadow: 0 4px 15px rgba(178, 34, 34, 0.2);
+        }
+        
+        .btn-secondary:hover {
+            background-color: rgba(178, 34, 34, 0.1);
+            box-shadow: 0 8px 20px rgba(178, 34, 34, 0.3);
+        }
+        
+        /* Section Styles */
+        section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            color: var(--primary-red);
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-red), var(--vortex-red));
+            border-radius: 2px;
+        }
+        
+        .section-title p {
+            color: var(--text-gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Services */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background: var(--dark-card);
+            border-left: 4px solid var(--primary-red);
+            border-radius: 4px;
+            padding: 30px;
+            transition: all 0.3s;
+            height: 100%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(178, 34, 34, 0.2);
+        }
+        
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--primary-red);
+            margin-bottom: 20px;
+        }
+        
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--text-light);
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .service-card ul {
+            list-style: none;
+            margin-top: 15px;
+        }
+        
+        .service-card li {
+            margin-bottom: 8px;
+            color: var(--text-gray);
+            position: relative;
+            padding-left: 20px;
+            font-size: 14px;
+        }
+        
+        .service-card li::before {
+            content: ">";
+            color: var(--primary-red);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+        
+        /* Solutions */
+        .solutions {
+            background-color: rgba(37, 41, 46, 0.5);
+        }
+        
+        .solutions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .solution-card {
+            background-color: var(--dark-card);
+            border-radius: 4px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .solution-card h3 {
+            color: var(--primary-red);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .solution-card ul {
+            list-style: none;
+        }
+        
+        .solution-card li {
+            margin-bottom: 10px;
+            color: var(--text-gray);
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .solution-card li::before {
+            content: "■";
+            color: var(--primary-red);
+            position: absolute;
+            left: 0;
+            font-size: 12px;
+        }
+        
+        /* Resources */
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .resource-card {
+            background: var(--dark-card);
+            border-radius: 4px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .resource-card h3 {
+            color: var(--primary-red);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .resource-card ul {
+            list-style: none;
+        }
+        
+        .resource-card li {
+            margin-bottom: 10px;
+            color: var(--text-gray);
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .resource-card li::before {
+            content: ">";
+            color: var(--primary-red);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+        
+        /* Blog */
+        .blog {
+            background-color: rgba(37, 41, 46, 0.5);
+        }
+        
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .blog-card {
+            background-color: var(--dark-card);
+            border-radius: 4px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(178, 34, 34, 0.2);
+        }
+        
+        .blog-card h3 {
+            color: var(--text-light);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        
+        .blog-card p {
+            color: var(--text-gray);
+            margin-bottom: 20px;
+        }
+        
+        /* About */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        
+        .about-text h2 {
+            color: var(--primary-red);
+            margin-bottom: 20px;
+            font-size: 2rem;
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .about-text p {
+            color: var(--text-gray);
+            margin-bottom: 30px;
+        }
+        
+        .testimonials {
+            margin-top: 50px;
+        }
+        
+        .testimonial {
+            background: var(--dark-card);
+            border-left: 4px solid var(--primary-red);
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 4px;
+        }
+        
+        .testimonial p {
+            color: var(--text-light);
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+        
+        .testimonial .author {
+            color: var(--primary-red);
+            font-weight: 600;
+        }
+        
+        /* Contact */
+        .contact {
+            background-color: rgba(37, 41, 46, 0.5);
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+        
+        .contact-info h3 {
+            color: var(--primary-red);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .contact-info p {
+            color: var(--text-gray);
+            margin-bottom: 30px;
+        }
+        
+        .contact-details {
+            list-style: none;
+        }
+        
+        .contact-details li {
+            margin-bottom: 15px;
+            color: var(--text-gray);
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-details i {
+            color: var(--primary-red);
+            margin-right: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            background-color: var(--dark-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            color: var(--text-light);
+            font-family: 'Roboto Mono', monospace;
+        }
+        
+        .contact-form textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        /* Locations */
+        .locations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .location-card {
+            background: var(--dark-card);
+            border-radius: 4px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        
+        .location-card h3 {
+            color: var(--primary-red);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .location-card p {
+            color: var(--text-gray);
+            margin-bottom: 20px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-bg);
+            padding: 60px 0 30px;
+            border-top: 1px solid rgba(178, 34, 34, 0.2);
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--primary-red);
+            margin-bottom: 20px;
+            display: block;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .footer-about p {
+            color: var(--text-gray);
+            margin-bottom: 20px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: var(--dark-card);
+            color: var(--text-light);
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary-red);
+            transform: translateY(-3px);
+        }
+        
+        .footer-links h4 {
+            color: var(--text-light);
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: var(--text-gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary-red);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .about-content,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--dark-bg);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-links li {
+                margin: 15px 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">Øffensive Bit</a>
+                
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#solutions">Solutions</a></li>
+                    <li><a href="#resources">Resources</a></li>
+                    <li><a href="#blog">Blog</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#locations">Locations</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <h1>We Play Øffense, You Win Defense</h1>
+            <p>Red Teaming. Adversary Simulation. Resilience Engineering.</p>
+            <a href="#services" class="btn">Explore Our Arsenal</a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Arsenal</h2>
+                <p>Comprehensive cybersecurity services to protect your organization from advanced threats</p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-skull-crossbones"></i>
+                    </div>
+                    <h3>Offensive Security</h3>
+                    <ul>
+                        <li>Red Teaming (APT-level adversary simulation)</li>
+                        <li>Purple Teaming (collaborative attack-defense exercises)</li>
+                        <li>Penetration Testing (Cloud, Web2.0/3.0, APIs, Mobile, IoT, ICS/SCADA)</li>
+                        <li>Ransomware Simulation & Preparedness</li>
+                        <li>AI/LLM Security Testing (prompt injection, data leakage, poisoning, model inversion, RLHF bypass, watermarking)</li>
+                        <li>Social Engineering & Phishing Simulation</li>
+                        <li>Physical Security Testing (facility access, badge cloning, tailgating)</li>
+                        <li>Initial Access Broker Simulation</li>
+                        <li>Long-term Persistence & Evasion Techniques</li>
+                    </ul>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Defensive Security</h3>
+                    <ul>
+                        <li>SOC-as-a-Service (24/7 monitoring and response)</li>
+                        <li>SIEM Development & Optimization</li>
+                        <li>Threat Hunting (intelligence-led)</li>
+                        <li>Incident Response & Digital Forensics (DFIR)</li>
+                        <li>Security Automation & Orchestration (SOAR)</li>
+                        <li>Behavioral Analytics & Insider Threat Detection</li>
+                        <li>EDR/XDR Tuning & Management</li>
+                        <li>Patch & Vulnerability Management Advisory</li>
+                        <li>Secure Configuration Baselines (CIS benchmarks, drift detection)</li>
+                    </ul>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <h3>Cloud & Application Security</h3>
+                    <ul>
+                        <li>Cloud Security Assessments (AWS, Azure, GCP)</li>
+                        <li>Application Security Testing (OWASP Top 10, logic flaws, workflow abuse)</li>
+                        <li>DevSecOps Security (CI/CD pipeline, SBOM validation, container runtime, Kubernetes hardening)</li>
+                        <li>Zero Trust Architecture Readiness</li>
+                        <li>API Security Testing</li>
+                        <li>Microservices & Serverless Security</li>
+                        <li>IoT Device Lifecycle Security</li>
+                        <li>Blockchain & Smart Contract Audits</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-user-lock"></i>
+                    </div>
+                    <h3>Identity & Access Management</h3>
+                    <ul>
+                        <li>Privileged Access Management (PAM)</li>
+                        <li>Identity Governance & Administration (IGA)</li>
+                        <li>Federated Identity & SSO Integration</li>
+                        <li>Multi-Factor Authentication (MFA) Strategy</li>
+                        <li>Identity Threat Detection & Response (ITDR)</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3>Data Security & Privacy Engineering</h3>
+                    <ul>
+                        <li>Data Loss Prevention (DLP)</li>
+                        <li>Data Classification & Labeling</li>
+                        <li>Privacy-by-Design Consulting</li>
+                        <li>Encryption Strategy & Key Management</li>
+                        <li>Secure Data Lifecycle Management</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Governance, Risk & Compliance</h3>
+                    <ul>
+                        <li>Privacy & Compliance Assessments (GDPR, HIPAA, CCPA, ISO 27001, SOC 2, IEC-62443, ISO-27701, PDPL, NCA, ECC & CCC)</li>
+                        <li>Supply Chain Risk Assessments</li>
+                        <li>Policy & Architecture Reviews</li>
+                        <li>Cyber Insurance Advisory</li>
+                        <li>Cross-border Data Transfer Compliance</li>
+                        <li>Cybersecurity Maturity Assessments</li>
+                        <li>Audit Preparation & Support</li>
+                        <li>Risk Register Development & Maintenance</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="#contact" class="btn">Get Started</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solutions Section -->
+    <section id="solutions" class="solutions">
+        <div class="container">
+            <div class="section-title">
+                <h2>Solutions</h2>
+                <p>Industry-specific cybersecurity solutions tailored to your organization's needs</p>
+            </div>
+            
+            <div class="solutions-grid">
+                <div class="solution-card">
+                    <h3>Industry-Specific</h3>
+                    <ul>
+                        <li><strong>Finance:</strong> Red team simulations targeting SWIFT, ATM, and payment infrastructure</li>
+                        <li><strong>Healthcare:</strong> HIPAA-aligned breach simulation and medical device security testing</li>
+                        <li><strong>Industrial Control Systems (ICS):</strong> OT/SCADA adversary emulation and resilience validation</li>
+                        <li><strong>Blockchain:</strong> Smart contract audits, DeFi attack simulation, and wallet security</li>
+                    </ul>
+                </div>
+                
+                <div class="solution-card">
+                    <h3>Threat-Informed Use Cases</h3>
+                    <ul>
+                        <li><strong>Ransomware Readiness:</strong> Full lifecycle simulation from initial access to encryption</li>
+                        <li><strong>Zero Trust Validation:</strong> Testing identity boundaries, segmentation, and policy enforcement</li>
+                        <li><strong>AI/LLM Security:</strong> Model inversion, prompt injection, and adversarial prompt testing</li>
+                        <li><strong>Assumed Breach:</strong> Post-compromise operations to validate detection and response</li>
+                        <li><strong>Supply Chain Risk:</strong> Vendor compromise simulation and open-source dependency testing</li>
+                        <li><strong>Cloud Breach Simulation:</strong> IAM misconfigurations, exposed secrets, and lateral movement</li>
+                        <li><strong>Insider Threat Emulation:</strong> Credential abuse, data exfiltration, and privilege escalation</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources Section -->
+    <section id="resources" class="resources">
+        <div class="container">
+            <div class="section-title">
+                <h2>Threat Lab</h2>
+                <p>Research, intelligence, and resources from our cybersecurity experts</p>
+            </div>
+            
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <h3>Whitepapers</h3>
+                    <ul>
+                        <li>Red Teaming for Financial Systems: Simulating SWIFT and ATM Threats</li>
+                        <li>Zero Trust Validation Framework: Testing Identity Boundaries</li>
+                        <li>AI/LLM Security: Prompt Injection and Model Inversion Techniques</li>
+                        <li>ICS/SCADA Resilience: Adversary Simulation in OT Environments</li>
+                    </ul>
+                </div>
+                
+                <div class="resource-card">
+                    <h3>Sample Engagement Reports</h3>
+                    <ul>
+                        <li>Assumed Breach Simulation – Healthcare Sector</li>
+                        <li>Cloud Penetration Test – Multi-Region AWS Deployment</li>
+                        <li>Ransomware Readiness Exercise – Industrial Control Systems</li>
+                        <li>AI Model Security Audit – LLM Deployment in Production</li>
+                    </ul>
+                </div>
+
+                <div class="resource-card">
+                    <h3>Threat Intelligence Kits</h3>
+                    <ul>
+                        <li>MITRE ATT&CK Mapping Toolkit</li>
+                        <li>Dark Web Monitoring Playbook</li>
+                        <li>Initial Access Broker Simulation Guide</li>
+                        <li>Threat Actor TTP Reference Sheets</li>
+                    </ul>
+                </div>
+
+                <div class="resource-card">
+                    <h3>Frameworks & Toolkits</h3>
+                    <ul>
+                        <li>Red Team Engagement Planning Template</li>
+                        <li>Zero Trust Assessment Checklist</li>
+                        <li>Cloud Misconfiguration Detection Scripts</li>
+                        <li>Incident Response Quickstart Kit</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog" class="blog">
+        <div class="container">
+            <div class="section-title">
+                <h2>The Offensive Log</h2>
+                <p>Where we dissect adversary tactics, share red team war stories, and publish threat intelligence</p>
+            </div>
+            
+            <div class="blog-grid">
+                <div class="blog-card">
+                    <h3>Living Off the Land: How Red Teams Use Native Tools to Stay Undetected</h3>
+                    <p>Explore the techniques used by advanced threat actors to evade detection using built-in system tools.</p>
+                    <a href="#" class="btn btn-secondary">Read More</a>
+                </div>
+                
+                <div class="blog-card">
+                    <h3>Initial Access Brokers: The Dark Web's Gatekeepers to Enterprise Breach</h3>
+                    <p>Understanding the ecosystem of initial access brokers and how they facilitate cyber attacks.</p>
+                    <a href="#" class="btn btn-secondary">Read More</a>
+                </div>
+                
+                <div class="blog-card">
+                    <h3>LLM Prompt Injection: Offensive Techniques Against AI Models</h3>
+                    <p>Examining the security vulnerabilities in large language models and how attackers can exploit them.</p>
+                    <a href="#" class="btn btn-secondary">Read More</a>
+                </div>
+
+                <div class="blog-card">
+                    <h3>Assumed Breach: Why Starting Inside is the Only Way to Test Resilience</h3>
+                    <p>Why assuming your defenses have already been breached leads to more effective security testing.</p>
+                    <a href="#" class="btn btn-secondary">Read More</a>
+                </div>
+
+                <div class="blog-card">
+                    <h3>Red Team vs Blue Team: Lessons from a 72-Hour Purple Engagement</h3>
+                    <p>Insights from a collaborative exercise where offensive and defensive teams worked together.</p>
+                    <a href="#" class="btn btn-secondary">Read More</a>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="#" class="btn">View All Articles</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Section -->
+    <section id="news" class="resources">
+        <div class="container">
+            <div class="section-title">
+                <h2>News & Updates</h2>
+                <p>Latest announcements, media mentions, and upcoming events</p>
+            </div>
+            
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <h3>Latest Announcements</h3>
+                    <ul>
+                        <li><strong>August 2025:</strong> OffensiveBit launches its Red Team Lab for advanced adversary simulation</li>
+                        <li><strong>July 2025:</strong> Partnership announced with ThreatGrid for real-time threat intelligence integration</li>
+                        <li><strong>June 2025:</strong> OffensiveBit featured in CyberSec Weekly for its AI/LLM security testing breakthroughs</li>
+                        <li><strong>May 2025:</strong> OffensiveBit expands operations to Riyadh and Montreal</li>
+                    </ul>
+                </div>
+                
+                <div class="resource-card">
+                    <h3>Media Mentions</h3>
+                    <ul>
+                        <li><strong>DarkOps Journal:</strong> "OffensiveBit's Red Team tactics mirror real-world APTs with surgical precision."</li>
+                        <li><strong>CyberSec Weekly:</strong> "Øffensive Bit is redefining AI model security testing."</li>
+                        <li><strong>Red Team Radar:</strong> "From assumed breach to ransomware simulation—OffensiveBit delivers realism."</li>
+                    </ul>
+                </div>
+
+                <div class="resource-card">
+                    <h3>Upcoming Events</h3>
+                    <ul>
+                        <li><strong>October 2025:</strong> OffensiveBit speaking at DEFCON Red Team Village</li>
+                        <li><strong>November 2025:</strong> Hosting "BitBurn" podcast live from Montreal HQ</li>
+                        <li><strong>December 2025:</strong> Launching OffensiveBit Threat Lab – a curated resource hub</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>About Øffensive Bit</h2>
+                <p>We don't play defense—we simulate the breach</p>
+            </div>
+            
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>We Play Øffense, So You Win Defense</h2>
+                    <p>At Øffensive Bit, our mission is to emulate real-world adversaries, expose the cracks, and build resilience from the inside out. We provide advanced adversary simulation services that help organizations strengthen their security posture.</p>
+                    <p>Our team of cybersecurity experts brings decades of experience in red teaming, penetration testing, and defensive security strategies.</p>
+                    <a href="#contact" class="btn">Contact Us</a>
+
+                    <div class="testimonials">
+                        <div class="testimonial">
+                            <p>"Øffensive Bit's red team exposed flaws our previous vendors missed entirely."</p>
+                            <div class="author">- CISO, Global Bank</div>
+                        </div>
+                        
+                        <div class="testimonial">
+                            <p>"Their ransomware simulation was brutal—and exactly what we needed."</p>
+                            <div class="author">- Head of Security, Healthcare Network</div>
+                        </div>
+                        
+                        <div class="testimonial">
+                            <p>"They didn't just test our defenses. They taught our blue team how to fight back."</p>
+                            <div class="author">- SOC Manager, Industrial Firm</div>
+                        </div>
+
+                        <div class="testimonial">
+                            <p>"The AI model security audit was eye-opening. We had no idea how vulnerable we were."</p>
+                            <div class="author">- CTO, Blockchain Startup</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="trusted-partners">
+                    <h3 style="color: var(--primary-red); margin-bottom: 20px; font-family: 'Orbitron', sans-serif;">Trusted Partners</h3>
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">
+                        <div style="background: var(--dark-card); padding: 20px; text-align: center; border-radius: 4px;">
+                            <div style="color: var(--primary-red); font-weight: bold;">ThreatGrid</div>
+                        </div>
+                        <div style="background: var(--dark-card); padding: 20px; text-align: center; border-radius: 4px;">
+                            <div style="color: var(--primary-red); font-weight: bold;">DarkOps Journal</div>
+                        </div>
+                        <div style="background: var(--dark-card); padding: 20px; text-align: center; border-radius: 4px;">
+                            <div style="color: var(--primary-red); font-weight: bold;">CyberSec Weekly</div>
+                        </div>
+                        <div style="background: var(--dark-card); padding: 20px; text-align: center; border-radius: 4px;">
+                            <div style="color: var(--primary-red); font-weight: bold;">Red Team Radar</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contact Us</h2>
+                <p>Ready to simulate the breach? Get in touch with our team</p>
+            </div>
+            
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Get In Touch</h3>
+                    <p>Reach out to discuss your security needs and how we can help strengthen your defenses.</p>
+                    
+                    <ul class="contact-details">
+                        <li><i class="fas fa-envelope"></i> contact@offensivebit.com</li>
+                        <li><i class="fas fa-phone"></i> +1 (800) 777-REDTEAM</li>
+                        <li><i class="fab fa-twitter"></i> @OffensiveBit</li>
+                        <li><i class="fab fa-linkedin"></i> Offensive Bit</li>
+                    </ul>
+                </div>
+                
+                <div class="contact-form">
+                    <form>
+                        <input type="text" placeholder="Your Name" required>
+                        <input type="email" placeholder="Your Email" required>
+                        <input type="text" placeholder="Subject">
+                        <textarea placeholder="Your Message" required></textarea>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Locations Section -->
+    <section id="locations" class="locations">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Global Reach</h2>
+                <p>We serve clients worldwide with teams in strategic locations</p>
+            </div>
+            
+            <div class="locations-grid">
+                <div class="location-card">
+                    <h3>🇺🇸 USA</h3>
+                    <p>389 Main Street, Unit 5, Salem, NH 03079</p>
+                    <a href="#" class="btn btn-secondary">View Map</a>
+                </div>
+                
+                <div class="location-card">
+                    <h3>🇸🇦 KSA</h3>
+                    <p>Building 7644, Salah ud Din Ayubi Road, King Abdul Aziz District, Riyadh RHAA7644</p>
+                    <a href="#" class="btn btn-secondary">View Map</a>
+                </div>
+                
+                <div class="location-card">
+                    <h3>🇨🇦 Canada</h3>
+                    <p>401-417, Saint-Pierre Street, H2Y 2M4, Montreal, QC</p>
+                    <a href="#" class="btn btn-secondary">View Map</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <a href="#" class="footer-logo">ØFFENSIVE BIT</a>
+                    <p>We play offense, so you win defense. Advanced adversary simulation and cybersecurity services.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="#">Red Teaming</a></li>
+                        <li><a href="#">Penetration Testing</a></li>
+                        <li><a href="#">Security Consulting</a></li>
+                        <li><a href="#">Incident Response</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">News</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Whitepapers</a></li>
+                        <li><a href="#">Webinars</a></li>
+                        <li><a href="#">Tools</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 OffensiveBit. All rights reserved. | <a href="#" style="color: var(--primary-red);">Privacy Policy</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const menuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    // Close mobile menu if open
+                    navLinks.classList.remove('active');
+                    
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
